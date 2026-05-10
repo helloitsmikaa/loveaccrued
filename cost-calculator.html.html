@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Did This Relationship Actually Cost You? Free Calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=DM+Serif+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#FF1493;--pink-glow:rgba(255,20,147,0.4);--black:#080808;--white:#F8F8F8;--cream:#EDE8DC;--silver:#888;--grid:rgba(255,20,147,0.055);}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Space Mono',monospace;overflow-x:hidden;min-height:100vh;}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.038;pointer-events:none;z-index:999;}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;border-bottom:1px solid rgba(255,20,147,0.12);border-top:3px solid var(--pink);backdrop-filter:blur(16px);background:rgba(8,8,8,0.82);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:4px;text-decoration:none;color:var(--white);}
+.nav-logo span{color:var(--pink);}
+.nav-tag{font-size:9px;letter-spacing:3px;color:var(--silver);text-transform:uppercase;}
+.wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:120px 32px 80px;}
+.eyebrow{font-size:9px;letter-spacing:5px;color:var(--pink);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.eyebrow::before,.eyebrow::after{content:"\2726";font-size:7px;}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,10vw,90px);line-height:.9;margin-bottom:16px;}
+h1 span{color:var(--pink);display:block;text-shadow:0 0 60px var(--pink-glow);}
+.subtitle{font-family:'DM Serif Display',serif;font-style:italic;font-size:15px;color:var(--silver);margin-bottom:48px;line-height:1.6;}
+.total-bar{background:rgba(255,20,147,0.05);border:1px solid rgba(255,20,147,0.18);padding:28px 32px;margin-bottom:48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.total-label{font-size:9px;letter-spacing:4px;color:var(--silver);text-transform:uppercase;}
+.total-amount{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,8vw,72px);color:var(--pink);letter-spacing:2px;text-shadow:0 0 40px var(--pink-glow);transition:all .2s;}
+.total-note{font-size:9px;letter-spacing:2px;color:#444;text-transform:uppercase;margin-top:4px;}
+.section-block{margin-bottom:48px;}
+.section-num{font-size:11px;letter-spacing:3px;color:rgba(255,20,147,0.4);margin-bottom:4px;}
+.section-head{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;margin-bottom:6px;}
+.section-head span{color:var(--pink);}
+.section-sub{font-size:9px;letter-spacing:2px;color:#444;text-transform:uppercase;margin-bottom:28px;}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+.input-group{}
+.input-label{font-size:9px;letter-spacing:3px;color:var(--silver);text-transform:uppercase;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;}
+.input-hint{font-size:8px;letter-spacing:1px;color:#444;text-transform:none;}
+.money-input{position:relative;}
+.money-prefix{position:absolute;left:0;top:50%;transform:translateY(-50%);color:var(--pink);font-size:15px;font-weight:700;pointer-events:none;}
+input[type=number]{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.08);color:var(--white);font-family:'Space Mono',monospace;font-size:15px;padding:10px 0 10px 16px;outline:none;transition:border-color .2s;-moz-appearance:textfield;}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
+input[type=number]:focus{border-bottom-color:var(--pink);}
+input[type=number]::placeholder{color:rgba(255,255,255,0.15);}
+.no-dollar input[type=number]{padding-left:0;}
+.divider{border:none;border-top:1px solid rgba(255,255,255,0.04);margin:48px 0;}
+.extra-bill-row{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-bottom:12px;align-items:end;}
+.extra-bill-row input[type=text]{background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.08);color:var(--white);font-family:'Space Mono',monospace;font-size:13px;padding:10px 0;outline:none;transition:border-color .2s;width:100%;}
+.extra-bill-row input[type=text]:focus{border-bottom-color:var(--pink);}
+.extra-bill-row input[type=text]::placeholder{color:rgba(255,255,255,0.15);}
+.add-bill-btn{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--silver);font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;padding:10px 16px;cursor:pointer;text-transform:uppercase;transition:all .2s;}
+.add-bill-btn:hover{border-color:var(--pink);color:var(--pink);}
+.remove-btn{background:transparent;border:none;color:#444;font-size:16px;cursor:pointer;padding:0 4px;line-height:1;}
+.remove-btn:hover{color:#FF4444;}
+.live-breakdown{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);padding:24px;margin-bottom:48px;}
+.breakdown-title{font-size:9px;letter-spacing:4px;color:var(--silver);text-transform:uppercase;margin-bottom:16px;}
+.breakdown-item{display:flex;justify-content:space-between;font-size:10px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.03);}
+.breakdown-item .bi-label{color:var(--silver);}
+.breakdown-item .bi-val{color:var(--white);}
+.breakdown-item.zero{opacity:.25;}
+.breakdown-total{display:flex;justify-content:space-between;font-size:12px;font-weight:700;padding-top:12px;margin-top:4px;}
+.generate-btn{width:100%;background:var(--pink);color:var(--black);font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:5px;padding:20px;border:none;cursor:pointer;transition:all .2s;margin-bottom:48px;}
+.generate-btn:hover{background:var(--white);}
+.receipt-section{display:none;}
+.receipt-section.show{display:block;}
+.receipt-eyebrow{font-size:9px;letter-spacing:5px;color:var(--pink);text-transform:uppercase;text-align:center;margin-bottom:20px;}
+.receipt-preview{background:#1a1a1a;border:1px solid rgba(255,20,147,0.15);padding:32px;max-width:460px;margin:0 auto 32px;position:relative;overflow:hidden;}
+.receipt-preview::before{content:'PREVIEW';position:absolute;top:12px;right:12px;font-size:8px;letter-spacing:3px;color:rgba(255,20,147,0.3);text-transform:uppercase;}
+.receipt-paper-preview{background:linear-gradient(180deg,#F0EBE0,#E8E3D4);color:#1a1a1a;font-family:'Courier New',monospace;font-size:10.5px;line-height:1.7;padding:24px 20px;position:relative;}
+.receipt-paper-preview::before{content:'';position:absolute;top:-7px;left:0;right:0;height:7px;background:linear-gradient(135deg,transparent 33.33%,#F0EBE0 33.33%) 0 0,linear-gradient(225deg,transparent 33.33%,#F0EBE0 33.33%) 0 0;background-size:7px 7px;background-repeat:repeat-x;}
+.receipt-paper-preview::after{content:'';position:absolute;bottom:-7px;left:0;right:0;height:7px;background:linear-gradient(315deg,transparent 33.33%,#E8E3D4 33.33%) 0 0,linear-gradient(45deg,transparent 33.33%,#E8E3D4 33.33%) 0 0;background-size:7px 7px;background-repeat:repeat-x;}
+.r-store{text-align:center;font-weight:700;font-size:12px;letter-spacing:3px;text-transform:uppercase;margin-bottom:2px;}
+.r-tag{text-align:center;font-size:8px;color:#666;letter-spacing:1px;margin-bottom:3px;}
+.r-div{border:none;border-top:1px dashed #bbb;margin:6px 0;}
+.r-div-s{border:none;border-top:1.5px solid #777;margin:5px 0;}
+.r-meta{font-size:8px;color:#666;margin-bottom:1px;}
+.r-head{text-align:center;font-size:9px;letter-spacing:2px;font-weight:700;text-transform:uppercase;margin:4px 0 2px;}
+.r-row{display:flex;justify-content:space-between;font-size:10px;padding:1px 0;}
+.r-sub{display:flex;justify-content:space-between;font-size:8px;color:#666;padding-left:8px;}
+.r-tot{display:flex;justify-content:space-between;font-size:10.5px;font-weight:700;padding:2px 0;}
+.r-bal{display:flex;justify-content:space-between;font-size:12px;font-weight:700;border-top:2px solid #1a1a1a;padding-top:5px;margin-top:3px;letter-spacing:1px;}
+.r-thanks{text-align:center;font-size:8px;letter-spacing:2px;text-transform:uppercase;margin-top:5px;color:#666;}
+.r-barcode{text-align:center;letter-spacing:-1.5px;font-size:24px;margin:6px 0 1px;color:#1a1a1a;line-height:1;}
+.r-barnum{text-align:center;font-size:7px;color:#888;letter-spacing:3px;}
+.share-row{display:flex;gap:10px;max-width:460px;margin:0 auto 40px;}
+.download-btn{flex:1;background:var(--pink);color:var(--black);font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:4px;padding:15px;border:none;cursor:pointer;transition:all .2s;text-align:center;}
+.download-btn:hover{background:var(--white);}
+.restart-btn{flex:1;background:transparent;border:1px solid rgba(255,255,255,0.1);color:var(--silver);font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:3px;padding:15px;cursor:pointer;transition:all .2s;}
+.restart-btn:hover{border-color:var(--silver);}
+.cta-box{background:rgba(255,20,147,0.05);border:1px solid rgba(255,20,147,0.18);padding:36px;text-align:center;max-width:460px;margin:0 auto;}
+.cta-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;margin-bottom:8px;}
+.cta-sub{font-size:10px;color:var(--silver);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;line-height:1.8;}
+.cta-btn{display:block;background:var(--pink);color:var(--black);font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:4px;padding:15px;text-decoration:none;text-align:center;transition:all .2s;margin-bottom:10px;}
+.cta-btn:hover{background:var(--white);}
+.cta-note{font-size:9px;letter-spacing:2px;color:#333;text-transform:uppercase;}
+@media(max-width:640px){
+nav{padding:14px 20px;}.wrap{padding:100px 20px 60px;}
+.total-bar{flex-direction:column;align-items:flex-start;gap:8px;}
+.input-row{grid-template-columns:1fr;}
+.extra-bill-row{grid-template-columns:1fr;}
+.share-row{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<nav>
+  <a href="/" class="nav-logo">LOVE<span>ACCRUED</span></a>
+  <div class="nav-tag">Free Tool</div>
+</nav>
+
+<div class="wrap">
+  <div class="eyebrow">Free Calculator</div>
+  <h1>WHAT DID THIS<br><span>ACTUALLY COST</span></h1>
+  <p class="subtitle">Your time has a dollar value. So do the bills you paid.<br>Put a real number on what this relationship cost you.</p>
+
+  <div class="total-bar">
+    <div>
+      <div class="total-label">Running Total</div>
+      <div class="total-note">Updates as you fill it in</div>
+    </div>
+    <div class="total-amount" id="total-display">$0</div>
+  </div>
+
+  <div class="section-block" style="margin-bottom:36px;">
+    <div class="section-head" style="font-size:22px;">BEFORE WE START <span style="font-size:16px;letter-spacing:2px;color:var(--silver);">OPTIONAL</span></div>
+    <div class="section-sub">Add names to personalize your receipt</div>
+    <div class="input-row">
+      <div class="input-group">
+        <div class="input-label">Your name</div>
+        <div class="no-dollar"><input type="text" id="your-name" placeholder="e.g. Jessica" style="background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.08);color:var(--white);font-family:'Space Mono',monospace;font-size:15px;padding:10px 0;outline:none;width:100%;" oninput="calc()"></div>
+      </div>
+      <div class="input-group">
+        <div class="input-label">Their name</div>
+        <div class="no-dollar"><input type="text" id="their-name" placeholder="e.g. Tyler" style="background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.08);color:var(--white);font-family:'Space Mono',monospace;font-size:15px;padding:10px 0;outline:none;width:100%;" oninput="calc()"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-num">01 / 03</div>
+    <div class="section-head">YOUR TIME <span>HAS A PRICE</span></div>
+    <div class="section-sub">Your hourly rate times hours spent equals real money lost</div>
+    <div class="input-row">
+      <div class="input-group">
+        <div class="input-label">Your hourly rate <span class="input-hint">Salary / 2080 = hourly</span></div>
+        <div class="money-input">
+          <span class="money-prefix">$</span>
+          <input type="number" id="hourly-rate" placeholder="e.g. 25" min="0" oninput="calc()">
+        </div>
+      </div>
+      <div class="input-group">
+        <div class="input-label">Months in the relationship</div>
+        <div class="no-dollar"><input type="number" id="months" placeholder="e.g. 14" min="0" oninput="calc()"></div>
+      </div>
+    </div>
+    <div class="input-row">
+      <div class="input-group">
+        <div class="input-label">Hours per week spent on them <span class="input-hint">Texting, dates, waiting</span></div>
+        <div class="no-dollar"><input type="number" id="hrs-week" placeholder="e.g. 15" min="0" max="168" oninput="calc()"></div>
+      </div>
+      <div class="input-group">
+        <div class="input-label">Hours per week thinking about them <span class="input-hint">Replaying, worrying</span></div>
+        <div class="no-dollar"><input type="number" id="hrs-think" placeholder="e.g. 10" min="0" max="168" oninput="calc()"></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-block">
+    <div class="section-num">02 / 03</div>
+    <div class="section-head">BILLS <span>YOU PAID</span></div>
+    <div class="section-sub">Real money that left your account for this relationship</div>
+    <div class="input-row">
+      <div class="input-group">
+        <div class="input-label">Dinners and dates you covered</div>
+        <div class="money-input"><span class="money-prefix">$</span><input type="number" id="dates" placeholder="0" min="0" oninput="calc()"></div>
+      </div>
+      <div class="input-group">
+        <div class="input-label">Gifts you gave</div>
+        <div class="money-input"><span class="money-prefix">$</span><input type="number" id="gifts" placeholder="0" min="0" oninput="calc()"></div>
+      </div>
+    </div>
+    <div class="input-row">
+      <div class="input-group">
+        <div class="input-label">Travel to see them or for them</div>
+        <div class="money-input"><span class="money-prefix">$</span><input type="number" id="travel" placeholder="0" min="0" oninput="calc()"></div>
+      </div>
+      <div class="input-group">
+        <div class="input-label">Therapy sessions caused by them</div>
+        <div class="money-input"><span class="money-prefix">$</span><input type="number" id="therapy" placeholder="0" min="0" oninput="calc()" style="padding-left:16px;"></div>
+      </div>
+    </div>
+    <div class="input-label" style="margin-bottom:14px;">Anything else you paid</div>
+    <div id="extra-bills"></div>
+    <button class="add-bill-btn" onclick="addBill()">+ Add another bill</button>
+
+    <div class="slider-section">
+      <div class="slider-item">
+        <div class="slider-head">
+          <span>Close friends you drifted from for them</span>
+        </div>
+        <div class="slider-sub">At $1,000 each in lost connection and time rebuilding</div>
+        <input type="range" min="0" max="10" value="0" id="s-friends" oninput="updateSlider()">
+        <div class="slider-labels" style="display:flex;justify-content:space-between;align-items:center;">
+          <span class="slider-label">None</span>
+          <span class="slider-cost" id="v-friends" style="font-size:13px;letter-spacing:2px;color:var(--pink);font-weight:700;">0 friends</span>
+          <span class="slider-label">10 friends</span>
+        </div>
+      </div>
+
+      <div class="slider-item">
+        <div class="slider-head">
+          <span>Nights of bad sleep because of them</span>
+        </div>
+        <div class="slider-sub">At $20 each in lost productivity and health</div>
+        <input type="range" min="0" max="365" value="0" id="s-sleep" oninput="updateSlider()">
+        <div class="slider-labels" style="display:flex;justify-content:space-between;align-items:center;">
+          <span class="slider-label">None</span>
+          <span class="slider-cost" id="v-sleep" style="font-size:13px;letter-spacing:2px;color:var(--pink);font-weight:700;">0 nights</span>
+          <span class="slider-label">365 nights</span>
+        </div>
+      </div>
+
+      <div class="slider-item">
+        <div class="slider-head">
+          <span>Times they canceled last minute</span>
+        </div>
+        <div class="slider-sub">At $50 each for your time and plans wasted</div>
+        <input type="range" min="0" max="100" value="0" id="s-cancel" oninput="updateSlider()">
+        <div class="slider-labels" style="display:flex;justify-content:space-between;align-items:center;">
+          <span class="slider-label">Never</span>
+          <span class="slider-cost" id="v-cancel" style="font-size:13px;letter-spacing:2px;color:var(--pink);font-weight:700;">0 times</span>
+          <span class="slider-label">100 times</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-block">
+    <div class="section-num">03 / 03</div>
+    <div class="section-head">THE <span>BREAKDOWN</span></div>
+    <div class="section-sub">Every item accounted for</div>
+    <div class="live-breakdown">
+      <div class="breakdown-title">Where your money went</div>
+      <div id="breakdown-rows"></div>
+      <div class="breakdown-total">
+        <span style="color:var(--silver);">Total</span>
+        <span style="color:var(--pink);" id="breakdown-total">$0</span>
+      </div>
+    </div>
+  </div>
+
+  <button class="generate-btn" onclick="showReceipt()">Generate My Receipt</button>
+
+  <div class="receipt-section" id="receipt-section">
+    <div class="receipt-eyebrow">&#x2726; Your financial audit &#x2726;</div>
+
+    <div class="receipt-preview">
+      <div class="receipt-paper-preview" id="receipt-paper"></div>
+    </div>
+
+    <div class="share-row">
+      <button class="download-btn" onclick="downloadReceipt()">Download Clean Version</button>
+      <button class="restart-btn" onclick="restart()">Start Over</button>
+    </div>
+
+    <div class="cta-box">
+      <div class="cta-title">MAKE IT PERSONAL</div>
+      <p class="cta-sub">This is the financial audit. The full breakup receipt tells the emotional story. Specific to you.</p>
+      <a href="create.html?type=breakup" class="cta-btn">Create My Breakup Receipt $14.99</a>
+      <div class="cta-note">This calculator is free. The receipt is the full story.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+let extraBills = [];
+let billId = 0;
+let lastData = null;
+
+function addBill() {
+  if (extraBills.length >= 1) return;
+  const id = billId++;
+  extraBills.push({id, label:'', amount:0});
+  renderExtraBills();
+}
+
+function renderExtraBills() {
+  const container = document.getElementById('extra-bills');
+  document.querySelector('.add-bill-btn').style.display = extraBills.length >= 1 ? 'none' : 'block';
+  container.innerHTML = extraBills.map(b => `
+    <div class="extra-bill-row" id="ebrow-${b.id}">
+      <div>
+        <div class="input-label">What was it for <button class="remove-btn" onclick="removeBill(${b.id})">x</button></div>
+        <input type="text" placeholder="e.g. Concert tickets, gas, groceries" value="${b.label}" oninput="updateBillLabel(${b.id}, this.value)">
+      </div>
+      <div>
+        <div class="input-label">Amount</div>
+        <div class="money-input">
+          <span class="money-prefix">$</span>
+          <input type="number" placeholder="0" min="0" value="${b.amount || ''}" oninput="updateBillAmount(${b.id}, this.value)" style="padding-left:16px;">
+        </div>
+      </div>
+    </div>
+  `).join('');
+  calc();
+}
+
+function updateBillLabel(id, val) { const b = extraBills.find(x=>x.id===id); if(b){b.label=val; calc();} }
+function updateBillAmount(id, val) { const b = extraBills.find(x=>x.id===id); if(b){b.amount=parseFloat(val)||0; calc();} }
+function removeBill(id) { extraBills=extraBills.filter(x=>x.id!==id); renderExtraBills(); }
+function num(id) { return parseFloat(document.getElementById(id).value)||0; }
+function sliderNum(id) { return parseInt(document.getElementById(id)?.value||0); }
+
+function updateSlider() {
+  const friends = sliderNum('s-friends');
+  const sleep = sliderNum('s-sleep');
+  const cancel = sliderNum('s-cancel');
+  document.getElementById('v-friends').textContent = friends + (friends===1?' friend':' friends');
+  document.getElementById('v-sleep').textContent = sleep + (sleep===1?' night':' nights');
+  document.getElementById('v-cancel').textContent = cancel + (cancel===1?' time':' times');
+  calc();
+}
+function fmt(n) { if(n===0)return'$0'; return '$'+Math.round(n).toLocaleString(); }
+
+function calc() {
+  const rate=num('hourly-rate'), months=num('months'), hrsWeek=num('hrs-week'), hrsThink=num('hrs-think');
+  const dates=num('dates'), gifts=num('gifts'), travel=num('travel'), therapy=num('therapy');
+  const weeks=months*4.33;
+  const activeHours=hrsWeek*weeks, thinkHours=hrsThink*weeks;
+  const timeCost=(activeHours+thinkHours)*rate;
+  const friends = sliderNum('s-friends');
+  const sleep = sliderNum('s-sleep');
+  const cancel = sliderNum('s-cancel');
+  const friendsCost = friends * 1000;
+  const sleepCost = sleep * 20;
+  const cancelCost = cancel * 50;
+  const extraTotal=extraBills.reduce((s,b)=>s+(b.amount||0),0);
+  const billsTotal=dates+gifts+travel+therapy+extraTotal+friendsCost+sleepCost+cancelCost;
+  const subtotal=timeCost+billsTotal;
+  const fee=subtotal*0.1;
+  const total=subtotal+fee;
+
+  document.getElementById('total-display').textContent=total>0?fmt(total):'$0';
+  document.getElementById('breakdown-total').textContent=fmt(total);
+
+  const rows=[];
+  if(rate>0&&months>0&&(hrsWeek>0||hrsThink>0)) rows.push({label:'Your time',detail:Math.round(activeHours+thinkHours)+' hrs @ '+fmt(rate)+'/hr',val:timeCost});
+  if(dates>0) rows.push({label:'Dinners and dates',detail:'you covered',val:dates});
+  if(gifts>0) rows.push({label:'Gifts given',detail:'out of pocket',val:gifts});
+  if(travel>0) rows.push({label:'Travel',detail:'for them or to them',val:travel});
+  if(therapy>0) rows.push({label:'Therapy',detail:'they caused',val:therapy});
+  extraBills.forEach(b=>{if(b.amount>0)rows.push({label:b.label||'Other expense',detail:'paid by you',val:b.amount});});
+  if(friendsCost>0) rows.push({label:'Friends drifted',detail:friends+(friends===1?' close friend':' close friends')+' x $1,000',val:friendsCost});
+  if(sleepCost>0) rows.push({label:'Nights of bad sleep',detail:sleep+' nights x $20',val:sleepCost});
+  if(cancelCost>0) rows.push({label:'Last-minute cancellations',detail:cancel+' times x $50',val:cancelCost});
+
+  const bRows=document.getElementById('breakdown-rows');
+  if(rows.length===0){
+    bRows.innerHTML='<div class="breakdown-item zero"><span class="bi-label">Fill in the fields above</span><span class="bi-val">$0</span></div>';
+  } else {
+    bRows.innerHTML=rows.map(r=>`<div class="breakdown-item ${r.val===0?'zero':''}"><span class="bi-label">${r.label}</span><span class="bi-val">${fmt(r.val)}</span></div>`).join('')+
+    (subtotal>0?`<div class="breakdown-item"><span class="bi-label" style="color:#444;">Waste of Time Fee (10%)</span><span class="bi-val" style="color:#444;">${fmt(fee)}</span></div>`:'');
+  }
+
+  lastData={rate,months,hrsWeek,hrsThink,activeHours,thinkHours,timeCost,dates,gifts,travel,therapy,extraTotal,subtotal,fee,total,rows};
+  return lastData;
+}
+
+function buildReceiptHTML(data, forPrint) {
+  const yourName = document.getElementById('your-name')?.value.trim() || '';
+  const theirName = document.getElementById('their-name')?.value.trim() || '';
+  const today=new Date().toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'numeric'});
+  const orderNum='LA-'+(window._orderNum||(window._orderNum=Math.floor(Math.random()*900000+100000)));
+  let items='';
+  if(data.timeCost>0){
+    const totalHrs=Math.round(data.activeHours+data.thinkHours);
+    items+=`<div class="r-row"><span>Your time</span></div><div class="r-sub"><span>${totalHrs} hrs @ ${fmt(data.rate)}/hr</span><span>${fmt(data.timeCost)}</span></div>`;
+    if(data.activeHours>0) items+=`<div class="r-sub"><span>Active: ${Math.round(data.activeHours)} hrs</span></div>`;
+    if(data.thinkHours>0) items+=`<div class="r-sub"><span>Thinking about them: ${Math.round(data.thinkHours)} hrs</span></div>`;
+  }
+  if(data.dates>0) items+=`<div class="r-row"><span>Dinners and dates</span></div><div class="r-sub"><span>covered by you</span><span>${fmt(data.dates)}</span></div>`;
+  if(data.gifts>0) items+=`<div class="r-row"><span>Gifts given</span></div><div class="r-sub"><span>no returns</span><span>${fmt(data.gifts)}</span></div>`;
+  if(data.travel>0) items+=`<div class="r-row"><span>Travel</span></div><div class="r-sub"><span>for them or to them</span><span>${fmt(data.travel)}</span></div>`;
+  if(data.therapy>0) items+=`<div class="r-row"><span>Therapy</span></div><div class="r-sub"><span>they caused this</span><span>${fmt(data.therapy)}</span></div>`;
+  extraBills.forEach(b=>{if(b.amount>0) items+=`<div class="r-row"><span>${b.label||'Additional expense'}</span></div><div class="r-sub"><span>paid by you</span><span>${fmt(b.amount)}</span></div>`;});
+  const friends2 = sliderNum('s-friends');
+  const sleep2 = sliderNum('s-sleep');
+  const cancel2 = sliderNum('s-cancel');
+  if(friends2>0) items+=`<div class="r-row"><span>Friends drifted</span></div><div class="r-sub"><span>${friends2} x $1,000 each</span><span>${fmt(friends2*1000)}</span></div>`;
+  if(sleep2>0) items+=`<div class="r-row"><span>Nights of bad sleep</span></div><div class="r-sub"><span>${sleep2} nights x $20</span><span>${fmt(sleep2*20)}</span></div>`;
+  if(cancel2>0) items+=`<div class="r-row"><span>Last-minute cancellations</span></div><div class="r-sub"><span>${cancel2} times x $50</span><span>${fmt(cancel2*50)}</span></div>`;
+  return `
+    <div class="r-store">LOVE ACCRUED</div>
+    <div class="r-tag">What This Relationship Actually Cost</div>
+    <div class="r-tag">loveaccrued.ai</div>
+    <hr class="r-div">
+    <div class="r-meta">DATE: ${today}</div>
+    <div class="r-meta">ORDER: #${orderNum}</div>
+    ${theirName ? `<div class="r-meta">FOR: ${theirName.toUpperCase()}</div>` : ''}
+    ${yourName ? `<div class="r-meta">PREPARED BY: ${yourName.toUpperCase()}</div>` : ''}
+    ${data.months>0?`<div class="r-meta">DURATION: ${data.months} months</div>`:''}
+    <hr class="r-div">
+    <div class="r-head">*** FINANCIAL AUDIT ***</div>
+    <hr class="r-div">
+    ${items}
+    <hr class="r-div">
+    <div class="r-tot"><span>SUBTOTAL</span><span>${fmt(data.subtotal)}</span></div>
+    <div class="r-tot"><span>WASTE OF TIME FEE (10%)</span><span>${fmt(data.fee)}</span></div>
+    <hr class="r-div-s">
+    <div class="r-bal"><span>TOTAL OWED</span><span>${fmt(data.total)}</span></div>
+    <hr class="r-div">
+    <div class="r-thanks">PAYMENT METHOD: NONE</div>
+    <div class="r-thanks">STATUS: UNPAID. AS EXPECTED.</div>
+    <div class="r-barcode">||| || ||| | || ||| ||</div>
+    <div class="r-barnum">${orderNum}-${new Date().getFullYear()}</div>
+  `;
+}
+
+function showReceipt() {
+  const d=calc();
+  if(d.total===0){alert('Fill in at least one field to generate your receipt.');return;}
+  window._orderNum=Math.floor(Math.random()*900000+100000);
+  document.getElementById('receipt-paper').innerHTML=buildReceiptHTML(d,false);
+  document.getElementById('receipt-section').classList.add('show');
+  setTimeout(()=>document.getElementById('receipt-section').scrollIntoView({behavior:'smooth',block:'start'}),100);
+}
+
+function downloadReceipt() {
+  if(!lastData||lastData.total===0){alert('Generate your receipt first.');return;}
+  const html=`<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Love Accrued Financial Audit</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+@page{margin:0.6in;size:letter portrait;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#F5F0E8;font-family:'Courier New',monospace;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:40px 20px;min-height:100vh;}
+
+.logo{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:8px;color:#FF1493;}
+.logo-sub{font-size:9px;letter-spacing:4px;color:#999;text-transform:uppercase;margin-top:4px;}
+.receipt{background:#EDE8DC;max-width:420px;width:100%;padding:28px 24px 32px;position:relative;border:1px solid #D4C9B8;}
+.receipt::before{content:'';position:absolute;top:-8px;left:0;right:0;height:8px;background:linear-gradient(135deg,transparent 33.33%,#EDE8DC 33.33%) 0 0,linear-gradient(225deg,transparent 33.33%,#EDE8DC 33.33%) 0 0;background-size:8px 8px;background-repeat:repeat-x;}
+.receipt::after{content:'';position:absolute;bottom:-8px;left:0;right:0;height:8px;background:linear-gradient(315deg,transparent 33.33%,#EDE8DC 33.33%) 0 0,linear-gradient(45deg,transparent 33.33%,#EDE8DC 33.33%) 0 0;background-size:8px 8px;background-repeat:repeat-x;}
+.r-store{text-align:center;font-weight:700;font-size:14px;letter-spacing:3px;text-transform:uppercase;margin-bottom:2px;color:#1a1a1a;}
+.r-tag{text-align:center;font-size:9px;color:#777;letter-spacing:1px;margin-bottom:2px;}
+.r-div{border:none;border-top:1px dashed #bbb;margin:8px 0;}
+.r-div-s{border:none;border-top:1.5px solid #888;margin:6px 0;}
+.r-meta{font-size:9px;color:#777;margin-bottom:2px;}
+.r-head{text-align:center;font-size:10px;letter-spacing:2px;font-weight:700;text-transform:uppercase;margin:6px 0 4px;color:#1a1a1a;}
+.r-row{display:flex;justify-content:space-between;font-size:11px;padding:2px 0;color:#1a1a1a;}
+.r-sub{display:flex;justify-content:space-between;font-size:9px;color:#666;padding-left:10px;}
+.r-tot{display:flex;justify-content:space-between;font-size:12px;font-weight:700;padding:3px 0;color:#1a1a1a;}
+.r-bal{display:flex;justify-content:space-between;font-size:14px;font-weight:700;border-top:2px solid #1a1a1a;padding-top:7px;margin-top:4px;letter-spacing:1px;color:#1a1a1a;}
+.r-thanks{text-align:center;font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-top:6px;color:#777;}
+.r-barcode{text-align:center;letter-spacing:-1.5px;font-size:28px;margin:10px 0 2px;color:#1a1a1a;line-height:1;}
+.r-barnum{text-align:center;font-size:8px;color:#999;letter-spacing:3px;}
+.footer{margin-top:32px;text-align:center;font-size:8px;letter-spacing:2px;color:#BBB;text-transform:uppercase;}
+</style>
+</head>
+<body>
+<div class="receipt" style="margin-top:0;">${buildReceiptHTML(lastData,true).replace(/class="r-/g,'class="r-')}</div>
+<div class="footer">Generated at loveaccrued.ai/cost-calculator</div>
+<script>window.onload=function(){window.print();}<\/script>
+</body>
+</html>`;
+  const w=window.open('','_blank','width=700,height=900');
+  w.document.write(html);
+  w.document.close();
+}
+
+function restart() {
+  document.getElementById('receipt-section').classList.remove('show');
+  window._orderNum=null;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Accrued - Everything You Felt. Finally On Paper.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'%3E%3Crect width='500' height='500' fill='%23080808'/%3E%3Cpath d='M 165 92 L 335 92 L 335 418 L 165 418 Z' fill='%23EDE8DC'/%3E%3Cpath d='M 250 348 C 222 330 196 306 196 280 C 196 260 210 249 226 253 C 237 256 248 268 250 274 C 252 268 263 256 274 253 C 290 249 304 260 304 280 C 304 306 278 330 250 348 Z' fill='%23FF1493'/%3E%3C/svg%3E">
+<style>
+:root{--pink:#FF1493;--pink-glow:rgba(255,20,147,0.4);--black:#080808;--white:#F8F8F8;--cream:#EDE8DC;--silver:#888;--grid:rgba(255,20,147,0.055);}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Space Mono',monospace;overflow-x:hidden;}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.038;pointer-events:none;z-index:999;}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;border-bottom:1px solid rgba(255,20,147,0.12);border-top:3px solid var(--pink);backdrop-filter:blur(16px);background:rgba(8,8,8,0.82);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;display:flex;align-items:center;gap:10px;cursor:pointer;}
+.nav-logo span{color:var(--pink);}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-link{font-size:9px;letter-spacing:3px;color:var(--silver);text-transform:uppercase;text-decoration:none;transition:color .2s;}
+.nav-link:hover{color:var(--pink);}
+.nav-cta{background:var(--pink);color:var(--black);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;padding:10px 22px;text-decoration:none;transition:all .2s;}
+.nav-cta:hover{background:var(--white);}
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:140px 48px 100px;text-align:center;z-index:1;overflow:hidden;}
+.glow-orb{position:absolute;width:750px;height:750px;background:radial-gradient(circle,rgba(255,20,147,0.1) 0%,transparent 70%);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:pulse 5s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:.7;transform:translate(-50%,-50%) scale(1);}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08);}}
+.star{position:absolute;color:var(--pink);animation:twinkle 3s ease-in-out infinite;pointer-events:none;}
+@keyframes twinkle{0%,100%{opacity:.2;transform:scale(1);}50%{opacity:1;transform:scale(1.3);}}
+.star:nth-child(2){animation-delay:.7s;}.star:nth-child(3){animation-delay:1.4s;}.star:nth-child(4){animation-delay:2.1s;}.star:nth-child(5){animation-delay:.3s;}
+.hero-eyebrow{font-size:9px;letter-spacing:5px;color:var(--pink);text-transform:uppercase;margin-bottom:36px;display:flex;align-items:center;gap:16px;}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'\2726';font-size:7px;}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(88px,15vw,190px);line-height:.88;letter-spacing:-1px;margin-bottom:28px;}
+.hero-title .w{display:block;color:var(--white);}
+.hero-title .p{display:block;color:var(--pink);text-shadow:0 0 80px var(--pink-glow),0 0 160px rgba(255,20,147,0.15);}
+.hero-sub{font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(16px,2.2vw,22px);color:var(--silver);margin-bottom:48px;line-height:1.7;}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.btn-primary{display:inline-block;background:var(--pink);color:var(--black);font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:5px;padding:18px 44px;text-decoration:none;border:none;cursor:pointer;transition:all .2s;}
+.btn-primary:hover{background:var(--white);transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--pink);}
+.btn-outline{display:inline-block;background:transparent;color:var(--white);font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:5px;padding:18px 44px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);cursor:pointer;transition:all .2s;}
+.btn-outline:hover{border-color:var(--pink);color:var(--pink);}
+.strip{position:relative;z-index:1;padding:22px 0;overflow:hidden;border-top:1px solid rgba(255,20,147,0.1);border-bottom:1px solid rgba(255,20,147,0.1);background:rgba(255,20,147,0.02);}
+.strip-track{display:flex;gap:64px;animation:marquee 26s linear infinite;white-space:nowrap;}
+.strip-item{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--silver);display:flex;align-items:center;gap:20px;flex-shrink:0;}
+.strip-item .dot{width:4px;height:4px;background:var(--pink);border-radius:50%;flex-shrink:0;}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.section-label{font-size:9px;letter-spacing:5px;color:var(--pink);text-transform:uppercase;margin-bottom:16px;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,6.5vw,78px);line-height:.95;margin-bottom:24px;}
+.wrap{position:relative;z-index:1;padding:110px 48px;max-width:1200px;margin:0 auto;}
+.showcase{display:flex;align-items:center;gap:80px;}
+.showcase-text{flex:1;}
+.showcase-desc{font-size:11px;color:var(--silver);line-height:2;margin-bottom:36px;max-width:380px;}
+.tag{font-size:8px;letter-spacing:3px;text-transform:uppercase;padding:9px 22px;border:1px solid;}
+.tag-love{border-color:var(--pink);color:var(--pink);background:rgba(255,20,147,0.05);}
+.tag-break{border-color:rgba(255,255,255,0.15);color:var(--silver);background:rgba(255,255,255,0.02);}
+.showcase-tags{display:flex;gap:12px;flex-wrap:wrap;}
+.receipt-wrap{flex-shrink:0;position:relative;width:300px;}
+.receipt-shadow{position:absolute;bottom:-24px;left:20px;right:20px;height:30px;background:rgba(0,0,0,0.45);filter:blur(22px);border-radius:50%;z-index:1;animation:sh 7s ease-in-out infinite;}
+@keyframes sh{0%,100%{opacity:.6;transform:scaleX(1);}50%{opacity:.3;transform:scaleX(.85);}}
+.receipt-paper{background:linear-gradient(180deg,#F0EBE0 0%,#EAE5D6 50%,#EDE8DC 100%);color:#1a1a1a;font-family:'Courier New',monospace;font-size:11px;line-height:1.7;padding:28px 20px 32px;width:300px;position:relative;transform:rotate(-3deg);box-shadow:-8px 14px 50px rgba(0,0,0,0.65),8px -4px 20px rgba(0,0,0,0.3),0 0 60px rgba(255,20,147,0.1);animation:float-r 7s ease-in-out infinite;z-index:2;}
+.receipt-paper::before{content:'';position:absolute;top:-9px;left:0;right:0;height:9px;background:linear-gradient(135deg,transparent 33.33%,#F0EBE0 33.33%) 0 0,linear-gradient(225deg,transparent 33.33%,#F0EBE0 33.33%) 0 0;background-size:9px 9px;background-repeat:repeat-x;}
+.receipt-paper::after{content:'';position:absolute;bottom:-9px;left:0;right:0;height:9px;background:linear-gradient(315deg,transparent 33.33%,#EDE8DC 33.33%) 0 0,linear-gradient(45deg,transparent 33.33%,#EDE8DC 33.33%) 0 0;background-size:9px 9px;background-repeat:repeat-x;}
+@keyframes float-r{0%,100%{transform:rotate(-3deg) translateY(0);}50%{transform:rotate(-2deg) translateY(-14px);}}
+.rp-store{text-align:center;font-weight:700;font-size:13px;letter-spacing:3px;text-transform:uppercase;margin-bottom:1px;}
+.rp-tag{text-align:center;font-size:8.5px;letter-spacing:1px;color:#666;margin-bottom:3px;}
+.rp-div{border:none;border-top:1px dashed #aaa;margin:7px 0;}
+.rp-div-s{border:none;border-top:1.5px solid #777;margin:5px 0;}
+.rp-meta{font-size:8.5px;color:#666;margin-bottom:1px;}
+.rp-head{text-align:center;font-size:10px;letter-spacing:2px;font-weight:700;text-transform:uppercase;margin:5px 0 3px;}
+.rp-row{display:flex;justify-content:space-between;font-size:10.5px;padding:1px 0;}
+.rp-sub{display:flex;justify-content:space-between;font-size:8.5px;color:#666;padding-left:8px;}
+.rp-tot{display:flex;justify-content:space-between;font-size:11.5px;font-weight:700;padding:2px 0;}
+.rp-bal{display:flex;justify-content:space-between;font-size:13px;font-weight:700;border-top:2px solid #1a1a1a;padding-top:6px;margin-top:3px;letter-spacing:1px;}
+.rp-thanks{text-align:center;font-size:8.5px;letter-spacing:2px;text-transform:uppercase;margin-top:6px;color:#666;}
+.rp-barcode{text-align:center;letter-spacing:-1.5px;font-size:30px;margin:8px 0 1px;color:#1a1a1a;line-height:1;}
+.rp-barnum{text-align:center;font-size:7.5px;color:#888;letter-spacing:3px;}
+.box-section{border-top:1px solid rgba(255,255,255,0.04);}
+.box-inner{display:flex;align-items:center;gap:80px;}
+.box-text{flex:1;}
+.box-desc{font-size:11px;color:var(--silver);line-height:2;margin-bottom:36px;max-width:380px;}
+.box-visual{flex-shrink:0;width:340px;}
+.pricing-section{border-top:1px solid rgba(255,255,255,0.04);}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px;}
+.pricing-card{padding:44px;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.02);transition:all .3s;}
+.pricing-card.featured{border-color:rgba(255,20,147,0.25);background:rgba(255,20,147,0.05);}
+.pricing-card:hover{transform:translateY(-4px);}
+.pricing-badge{font-size:8px;letter-spacing:3px;text-transform:uppercase;padding:6px 16px;background:rgba(255,20,147,0.12);color:var(--pink);border:1px solid rgba(255,20,147,0.2);display:inline-block;margin-bottom:20px;}
+.pricing-tier{font-family:'Bebas Neue',sans-serif;font-size:44px;letter-spacing:2px;margin-bottom:4px;}
+.pricing-price{font-size:50px;font-family:'Bebas Neue',sans-serif;letter-spacing:1px;color:var(--pink);margin-bottom:4px;}
+.pricing-price span{font-size:20px;color:var(--silver);}
+.pricing-sub{font-size:10px;color:var(--silver);letter-spacing:2px;text-transform:uppercase;margin-bottom:28px;}
+.pricing-features{list-style:none;margin-bottom:32px;}
+.pricing-features li{font-size:10px;color:var(--silver);padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;gap:10px;line-height:1.6;}
+.pricing-features li::before{content:'\2726';color:var(--pink);font-size:7px;flex-shrink:0;margin-top:3px;}
+.pricing-btn{display:block;text-align:center;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:4px;padding:15px;text-decoration:none;transition:all .2s;cursor:pointer;border:none;}
+.pricing-btn-solid{background:var(--pink);color:var(--black);}
+.pricing-btn-solid:hover{background:var(--white);}
+.pricing-btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.12);color:var(--white);}
+.pricing-btn-outline:hover{border-color:var(--pink);color:var(--pink);}
+.products-section{border-top:1px solid rgba(255,255,255,0.04);}
+.products-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.card{padding:44px;transition:transform .3s,box-shadow .3s;}
+.card-love{background:rgba(255,20,147,0.05);border:1px solid rgba(255,20,147,0.18);}
+.card-love:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(255,20,147,0.12);background:rgba(255,20,147,0.08);}
+.card-break{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);}
+.card-break:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,0.3);background:rgba(255,255,255,0.04);}
+.card-num{font-size:9px;letter-spacing:4px;color:var(--silver);margin-bottom:20px;}
+.card-name{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:2px;line-height:1;margin-bottom:10px;}
+.card-love .card-name{color:var(--pink);}
+.card-break .card-name{color:var(--white);}
+.card-sub{font-family:'DM Serif Display',serif;font-style:italic;font-size:13px;color:var(--silver);margin-bottom:28px;line-height:1.6;}
+.card-price{font-size:10px;letter-spacing:2px;color:var(--silver);text-transform:uppercase;}
+.card-price strong{display:block;font-size:22px;color:var(--white);margin-top:4px;}
+.card-btn{display:inline-block;margin-top:20px;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;padding:12px 28px;text-decoration:none;transition:all .2s;cursor:pointer;border:none;}
+.card-btn-love{background:var(--pink);color:var(--black);}
+.card-btn-love:hover{background:var(--white);}
+.card-btn-break{background:transparent;border:1px solid rgba(255,255,255,0.15);color:var(--white);}
+.card-btn-break:hover{border-color:var(--white);background:rgba(255,255,255,0.05);}
+.mini-r{background:linear-gradient(180deg,#EDE8DC,#E6E1D4);color:#1a1a1a;padding:16px 14px;font-family:'Courier New',monospace;font-size:8.5px;line-height:2;margin-bottom:28px;position:relative;}
+.mini-r::before{content:'';position:absolute;top:-6px;left:0;right:0;height:6px;background:linear-gradient(135deg,transparent 33.33%,#EDE8DC 33.33%) 0 0,linear-gradient(225deg,transparent 33.33%,#EDE8DC 33.33%) 0 0;background-size:6px 6px;}
+.m-hd{text-align:center;font-weight:700;font-size:9px;letter-spacing:2px;margin-bottom:4px;}
+.m-dv{border-top:1px dashed #bbb;margin:4px 0;}
+.m-row{display:flex;justify-content:space-between;}
+.m-tot{display:flex;justify-content:space-between;font-weight:700;border-top:1.5px solid #1a1a1a;padding-top:5px;margin-top:3px;font-size:9px;letter-spacing:1px;}
+.how-section{border-top:1px solid rgba(255,255,255,0.04);}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;margin-top:64px;}
+.step-num{font-family:'Bebas Neue',sans-serif;font-size:88px;color:rgba(255,20,147,0.1);line-height:1;margin-bottom:-18px;}
+.step-title{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:2px;margin-bottom:14px;}
+.step-desc{font-size:10px;color:var(--silver);line-height:1.9;}
+.celeb-section{border-top:1px solid rgba(255,20,147,0.1);background:rgba(255,20,147,0.02);text-align:center;}
+.celeb-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,7vw,84px);line-height:.95;margin-bottom:16px;}
+.celeb-title span{color:var(--pink);}
+.celeb-sub{font-family:'DM Serif Display',serif;font-style:italic;color:var(--silver);font-size:15px;margin-bottom:60px;line-height:1.6;}
+.celeb-receipts{display:flex;gap:28px;padding-bottom:12px;justify-content:center;flex-wrap:wrap;}
+.celeb-card{background:linear-gradient(180deg,#EDE8DC,#E4DFD0);color:#1a1a1a;padding:20px 16px;font-family:'Courier New',monospace;font-size:9px;line-height:1.9;width:220px;flex-shrink:0;text-align:left;transform:rotate(var(--r,0deg));box-shadow:0 20px 60px rgba(0,0,0,0.5);transition:transform .3s;position:relative;}
+.celeb-card::before{content:'';position:absolute;top:-6px;left:0;right:0;height:6px;background:linear-gradient(135deg,transparent 33.33%,#EDE8DC 33.33%) 0 0,linear-gradient(225deg,transparent 33.33%,#EDE8DC 33.33%) 0 0;background-size:6px 6px;}
+.celeb-card:hover{transform:rotate(0deg) translateY(-10px)!important;}
+.celeb-card:nth-child(1){--r:-2.5deg;}.celeb-card:nth-child(2){--r:1.5deg;}.celeb-card:nth-child(3){--r:-1deg;}
+.c-name{font-weight:700;font-size:10px;letter-spacing:2px;text-align:center;margin-bottom:6px;text-transform:uppercase;}
+.c-type{text-align:center;font-size:8px;letter-spacing:2px;color:#888;margin-bottom:6px;text-transform:uppercase;}
+.c-div{border-top:1px dashed #aaa;margin:5px 0;}
+.c-divs{border-top:1.5px solid #777;margin:4px 0;}
+.c-row{display:flex;justify-content:space-between;}
+.c-bal{display:flex;justify-content:space-between;font-weight:700;font-size:9px;padding-top:4px;}
+.faq-section{border-top:1px solid rgba(255,255,255,0.04);}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:64px;}
+.faq-q{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;margin-bottom:12px;}
+.faq-a{font-size:11px;color:var(--silver);line-height:1.9;}
+.cta-section{border-top:1px solid rgba(255,20,147,0.12);text-align:center;}
+.cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,9vw,110px);line-height:.9;margin-bottom:16px;}
+.cta-title span{color:var(--pink);text-shadow:0 0 60px var(--pink-glow);}
+.cta-sub{font-family:'DM Serif Display',serif;font-style:italic;color:var(--silver);font-size:16px;margin-bottom:48px;}
+footer{position:relative;z-index:1;padding:36px 48px;border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-between;align-items:center;}
+.f-logo{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:4px;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:8px;}
+.f-logo span{color:var(--pink);}
+.f-copy{font-size:8px;letter-spacing:2px;color:rgba(255,255,255,0.15);text-transform:uppercase;}
+@media(max-width:900px){
+nav{padding:16px 24px;}.nav-links{display:none;}
+.hero{padding:110px 24px 80px;}.hero-btns{flex-direction:column;align-items:center;}
+.showcase{flex-direction:column;padding:72px 24px;gap:60px;align-items:center;}
+.box-inner{flex-direction:column;padding:72px 24px;gap:48px;}
+.box-visual{width:100%;max-width:340px;}
+.wrap{padding:72px 24px;}
+.products-grid{grid-template-columns:1fr;}
+.pricing-grid{grid-template-columns:1fr;}
+.steps{grid-template-columns:1fr;gap:40px;}
+.faq-grid{grid-template-columns:1fr;}
+footer{padding:24px;flex-direction:column;gap:12px;text-align:center;}
+}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<nav>
+  <div class="nav-logo" onclick="window.scrollTo(0,0)">
+    <svg width="20" height="32" viewBox="0 0 500 500" aria-hidden="true">
+      <rect width="500" height="500" fill="#080808"/>
+      <path d="M 165 92 L 335 92 L 335 418 L 165 418 Z" fill="#EDE8DC"/>
+      <path d="M 250 348 C 222 330 196 306 196 280 C 196 260 210 249 226 253 C 237 256 248 268 250 274 C 252 268 263 256 274 253 C 290 249 304 260 304 280 C 304 306 278 330 250 348 Z" fill="#FF1493"/>
+    </svg>
+    LOVE<span>ACCRUED</span>
+  </div>
+  <div class="nav-links">
+    <a href="#how" class="nav-link">How It Works</a>
+    <a href="#products" class="nav-link">Products</a>
+    <a href="#pricing" class="nav-link">Pricing</a>
+    <a href="create.html" class="nav-cta">Create Yours</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="glow-orb"></div>
+  <span class="star" style="top:18%;left:12%;font-size:16px;">&#x2726;</span>
+  <span class="star" style="top:28%;right:16%;font-size:9px;">&#x2736;</span>
+  <span class="star" style="bottom:28%;left:20%;font-size:11px;">&#x2605;</span>
+  <span class="star" style="top:65%;right:22%;font-size:14px;">&#x2726;</span>
+  <span class="star" style="top:14%;right:32%;font-size:7px;">&#x2736;</span>
+  <div class="hero-eyebrow">Personalized receipts and letters</div>
+  <h1 class="hero-title">
+    <span class="w">LOVE</span>
+    <span class="p">ACCRUED</span>
+  </h1>
+  <p class="hero-sub">Everything you felt.<br>Finally on paper.</p>
+  <div class="hero-btns">
+    <a href="create.html" class="btn-primary">Create Love Receipt</a>
+    <a href="create.html?type=breakup" class="btn-outline">Create Breakup Receipt</a>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="strip-track">
+    <div class="strip-item"><span class="dot"></span>Love Receipt $14.99</div>
+    <div class="strip-item"><span class="dot"></span>Breakup Receipt $14.99</div>
+    <div class="strip-item"><span class="dot"></span>Love Letter $14.99</div>
+    <div class="strip-item"><span class="dot"></span>Breakup Letter $14.99</div>
+    <div class="strip-item"><span class="dot"></span>Giant Physical Box $79.99</div>
+    <div class="strip-item"><span class="dot"></span>Personalized by AI</div>
+    <div class="strip-item"><span class="dot"></span>Delivered to their door</div>
+    <div class="strip-item"><span class="dot"></span>Everything documented</div>
+    <div class="strip-item"><span class="dot"></span>Love Receipt $14.99</div>
+    <div class="strip-item"><span class="dot"></span>Breakup Receipt $14.99</div>
+    <div class="strip-item"><span class="dot"></span>Love Letter $14.99</div>
+    <div class="strip-item"><span class="dot"></span>Breakup Letter $14.99</div>
+    <div class="strip-item"><span class="dot"></span>Giant Physical Box $79.99</div>
+    <div class="strip-item"><span class="dot"></span>Personalized by AI</div>
+    <div class="strip-item"><span class="dot"></span>Delivered to their door</div>
+    <div class="strip-item"><span class="dot"></span>Everything documented</div>
+  </div>
+</div>
+
+<!-- FLOATING RECEIPT SHOWCASE -->
+<section class="wrap showcase">
+  <div class="showcase-text">
+    <div class="section-label">&#x2726; The Product</div>
+    <h2 class="section-title">EVERY FEELING.<br>ITEMIZED.<br><span style="color:var(--pink);">DOCUMENTED.</span></h2>
+    <p class="showcase-desc">You answer questions about the person and the relationship. The AI generates a receipt specific to your story. Not a template. Every receipt is different.</p>
+    <div class="showcase-tags">
+      <div class="tag tag-love">&#x2726; Digital $14.99</div>
+      <div class="tag tag-break">&#x2726; Physical Box $79.99</div>
+    </div>
+  </div>
+  <div class="receipt-wrap">
+    <div class="receipt-shadow"></div>
+    <div class="receipt-paper">
+      <div class="rp-store">LOVE ACCRUED</div>
+      <div class="rp-tag">Everything You Felt. Finally On Paper.</div>
+      <hr class="rp-div">
+      <div class="rp-meta">DATE: 05/09/2026 &nbsp; TIME: 11:47 PM</div>
+      <div class="rp-meta">ORDER: #LA-002847</div>
+      <div class="rp-meta">FOR: HER</div>
+      <hr class="rp-div">
+      <div class="rp-head">*** LOVE RECEIPT ***</div>
+      <hr class="rp-div">
+      <div class="rp-row"><span>Answering when I call</span></div>
+      <div class="rp-sub"><span>even mid-meeting, always</span><span>priceless</span></div>
+      <div class="rp-row"><span>Staying when it got hard</span></div>
+      <div class="rp-sub"><span>2022 to 2023, twice</span><span>$12,400.00</span></div>
+      <div class="rp-row"><span>Not keeping score</span></div>
+      <div class="rp-sub"><span>7 years running</span><span>$8,760.00</span></div>
+      <div class="rp-row"><span>The dinner you made</span></div>
+      <div class="rp-sub"><span>when I could not get out of bed</span><span>$2,000.00</span></div>
+      <div class="rp-row"><span>Knowing when to give space</span></div>
+      <div class="rp-sub"><span>and actually giving it</span><span>$4,200.00</span></div>
+      <div class="rp-row"><span>Being the first call</span></div>
+      <div class="rp-sub"><span>good news, bad news, no news</span><span>$6,100.00</span></div>
+      <hr class="rp-div">
+      <div class="rp-tot"><span>SUBTOTAL</span><span>$33,460.00</span></div>
+      <div class="rp-tot"><span>WORTH IT TAX</span><span>$3,346.00</span></div>
+      <hr class="rp-div-s">
+      <div class="rp-bal"><span>TOTAL LOVE</span><span>PRICELESS</span></div>
+      <hr class="rp-div">
+      <div class="rp-thanks">Seven years of choosing this.</div>
+      <div class="rp-thanks">Thank you for not flinching.</div>
+      <div class="rp-barcode">||| || ||| | || ||| ||</div>
+      <div class="rp-barnum">LA-002847-2026</div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHYSICAL BOX MOCKUP -->
+<section class="wrap box-section" id="physical">
+  <div class="box-inner">
+    <div class="box-text">
+      <div class="section-label">&#x2726; The Physical Box</div>
+      <h2 class="section-title">ROLLED UP.<br>BOXED.<br><span style="color:var(--pink);">DELIVERED.</span></h2>
+      <p class="box-desc">The giant physical receipt ships in a premium box. It unrolls. It lands. It says everything you never could. 3 to 5 business days anywhere in the US.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <div class="tag tag-love">&#x2726; 3 feet long</div>
+        <div class="tag tag-break">&#x2726; Ships in premium box</div>
+        <div class="tag tag-break">&#x2726; $79.99</div>
+      </div>
+    </div>
+    <div class="box-visual">
+      <svg viewBox="0 0 340 740" style="width:100%;display:block;" xmlns="http://www.w3.org/2000/svg">
+        <!-- Glow behind receipt -->
+        <ellipse cx="170" cy="420" rx="130" ry="280" fill="rgba(255,20,147,0.06)"/>
+        <!-- Box shadow -->
+        <ellipse cx="170" cy="448" rx="140" ry="14" fill="rgba(0,0,0,0.5)"/>
+        <!-- Box body -->
+        <rect x="30" y="290" width="280" height="155" rx="2" fill="#111111" stroke="rgba(255,20,147,0.18)" stroke-width="1"/>
+        <!-- Box interior top -->
+        <rect x="35" y="290" width="270" height="28" fill="#0A0A0A"/>
+        <!-- Box logo area -->
+        <text x="170" y="340" text-anchor="middle" font-family="Bebas Neue, Arial Black, sans-serif" font-size="12" letter-spacing="3" fill="rgba(255,20,147,0.5)">LOVE ACCRUED</text>
+        <line x1="60" y1="348" x2="280" y2="348" stroke="rgba(255,20,147,0.12)" stroke-width="0.5"/>
+        <text x="170" y="360" text-anchor="middle" font-family="Courier New, monospace" font-size="7" letter-spacing="2" fill="rgba(255,255,255,0.12)">loveaccrued.ai</text>
+        <!-- Box lid open -->
+        <path d="M 22 292 L 318 292 L 310 208 L 30 208 Z" fill="#181818" stroke="rgba(255,20,147,0.15)" stroke-width="1"/>
+        <path d="M 30 292 L 310 292 L 303 218 L 37 218 Z" fill="#0D0D0D"/>
+        <line x1="22" y1="292" x2="318" y2="292" stroke="rgba(255,20,147,0.22)" stroke-width="1"/>
+        <!-- Receipt paper -->
+        <path d="
+          M 88 278
+          L 93 269 L 98 278 L 103 269 L 108 278 L 113 269 L 118 278 L 123 269 L 128 278
+          L 133 269 L 138 278 L 143 269 L 148 278 L 153 269 L 158 278 L 163 269 L 168 278
+          L 173 269 L 178 278 L 183 269 L 188 278 L 193 269 L 198 278 L 203 269 L 208 278
+          L 213 269 L 218 278 L 223 269 L 228 278 L 233 269 L 238 278 L 243 269 L 248 278
+          L 253 269 L 258 278 L 263 269 L 268 278 L 268 730
+          L 263 738 L 258 730 L 253 738 L 248 730 L 243 738 L 238 730 L 233 738 L 228 730
+          L 223 738 L 218 730 L 213 738 L 208 730 L 203 738 L 198 730 L 193 738 L 188 730
+          L 183 738 L 178 730 L 173 738 L 168 730 L 163 738 L 158 730 L 153 738 L 148 730
+          L 143 738 L 138 730 L 133 738 L 128 730 L 123 738 L 118 730 L 113 738 L 108 730
+          L 103 738 L 98 730 L 93 738 L 88 730 Z"
+          fill="#EDE8DC"/>
+        <!-- Receipt text -->
+        <text x="178" y="298" text-anchor="middle" font-family="Courier New, monospace" font-size="8" font-weight="700" letter-spacing="2" fill="#1a1a1a">LOVE ACCRUED</text>
+        <line x1="98" y1="306" x2="258" y2="306" stroke="#AAAAAA" stroke-width="0.5" stroke-dasharray="3,2"/>
+        <text x="102" y="315" font-family="Courier New, monospace" font-size="6.5" fill="#777">DATE: 05/09/2026</text>
+        <text x="102" y="323" font-family="Courier New, monospace" font-size="6.5" fill="#777">FOR: JAKE</text>
+        <line x1="98" y1="329" x2="258" y2="329" stroke="#AAAAAA" stroke-width="0.5" stroke-dasharray="3,2"/>
+        <text x="178" y="339" text-anchor="middle" font-family="Courier New, monospace" font-size="7" font-weight="700" letter-spacing="2" fill="#1a1a1a">FINAL BILL</text>
+        <line x1="98" y1="344" x2="258" y2="344" stroke="#AAAAAA" stroke-width="0.5" stroke-dasharray="3,2"/>
+        <text x="102" y="355" font-family="Courier New, monospace" font-size="7" fill="#1a1a1a">Not showing up</text>
+        <text x="102" y="363" font-family="Courier New, monospace" font-size="6" fill="#777">  11 months of it</text>
+        <text x="255" y="363" text-anchor="end" font-family="Courier New, monospace" font-size="6" fill="#777">$3,300</text>
+        <text x="102" y="374" font-family="Courier New, monospace" font-size="7" fill="#1a1a1a">Read receipts, no reply</text>
+        <text x="102" y="382" font-family="Courier New, monospace" font-size="6" fill="#777">  63 times confirmed</text>
+        <text x="255" y="382" text-anchor="end" font-family="Courier New, monospace" font-size="6" fill="#777">$1,890</text>
+        <text x="102" y="393" font-family="Courier New, monospace" font-size="7" fill="#1a1a1a">Canceled last minute</text>
+        <text x="102" y="401" font-family="Courier New, monospace" font-size="6" fill="#777">  14 times</text>
+        <text x="255" y="401" text-anchor="end" font-family="Courier New, monospace" font-size="6" fill="#777">$700</text>
+        <text x="102" y="412" font-family="Courier New, monospace" font-size="7" fill="#1a1a1a">The conversation you avoided</text>
+        <text x="102" y="420" font-family="Courier New, monospace" font-size="6" fill="#777">  8 months running</text>
+        <text x="255" y="420" text-anchor="end" font-family="Courier New, monospace" font-size="6" fill="#777">$2,400</text>
+        <text x="102" y="431" font-family="Courier New, monospace" font-size="7" fill="#1a1a1a">Therapy it caused</text>
+        <text x="102" y="439" font-family="Courier New, monospace" font-size="6" fill="#777">  6 sessions x $150</text>
+        <text x="255" y="439" text-anchor="end" font-family="Courier New, monospace" font-size="6" fill="#777">$900</text>
+        <text x="102" y="450" font-family="Courier New, monospace" font-size="7" fill="#1a1a1a">Friends I stopped seeing for you</text>
+        <text x="102" y="458" font-family="Courier New, monospace" font-size="6" fill="#777">  3 people x $1,000</text>
+        <text x="255" y="458" text-anchor="end" font-family="Courier New, monospace" font-size="6" fill="#777">$3,000</text>
+        <text x="102" y="469" font-family="Courier New, monospace" font-size="7" fill="#1a1a1a">Waiting for you to change</text>
+        <text x="102" y="477" font-family="Courier New, monospace" font-size="6" fill="#777">  2 years of it</text>
+        <text x="255" y="477" text-anchor="end" font-family="Courier New, monospace" font-size="6" fill="#777">$8,760</text>
+        <text x="102" y="488" font-family="Courier New, monospace" font-size="7" fill="#1a1a1a">Nights of bad sleep</text>
+        <text x="102" y="496" font-family="Courier New, monospace" font-size="6" fill="#777">  147 nights x $20</text>
+        <text x="255" y="496" text-anchor="end" font-family="Courier New, monospace" font-size="6" fill="#777">$2,940</text>
+        <text x="102" y="507" font-family="Courier New, monospace" font-size="7" fill="#1a1a1a">Time I will not get back</text>
+        <text x="102" y="515" font-family="Courier New, monospace" font-size="6" fill="#777">  2 years of my life</text>
+        <text x="255" y="515" text-anchor="end" font-family="Courier New, monospace" font-size="6" fill="#777">$17,520</text>
+        <line x1="98" y1="522" x2="258" y2="522" stroke="#AAAAAA" stroke-width="0.5" stroke-dasharray="3,2"/>
+        <text x="102" y="532" font-family="Courier New, monospace" font-size="7" font-weight="700" fill="#1a1a1a">SUBTOTAL</text>
+        <text x="255" y="532" text-anchor="end" font-family="Courier New, monospace" font-size="7" font-weight="700" fill="#1a1a1a">$41,410</text>
+        <text x="102" y="542" font-family="Courier New, monospace" font-size="7" fill="#1a1a1a">WASTE OF TIME FEE (10%)</text>
+        <text x="255" y="542" text-anchor="end" font-family="Courier New, monospace" font-size="7" fill="#1a1a1a">$4,141</text>
+        <line x1="98" y1="549" x2="258" y2="549" stroke="#1a1a1a" stroke-width="1.5"/>
+        <text x="102" y="561" font-family="Courier New, monospace" font-size="9" font-weight="700" fill="#1a1a1a">BALANCE DUE</text>
+        <text x="255" y="561" text-anchor="end" font-family="Courier New, monospace" font-size="9" font-weight="700" fill="#1a1a1a">UNPAID</text>
+        <line x1="98" y1="568" x2="258" y2="568" stroke="#AAAAAA" stroke-width="0.5" stroke-dasharray="3,2"/>
+        <text x="178" y="580" text-anchor="middle" font-family="Courier New, monospace" font-size="6.5" fill="#666">PAYMENT METHOD: NONE.</text>
+        <text x="178" y="589" text-anchor="middle" font-family="Courier New, monospace" font-size="6.5" fill="#666">STATUS: UNPAID. AS EXPECTED.</text>
+        <text x="178" y="606" text-anchor="middle" font-family="Courier New, monospace" font-size="20" letter-spacing="-1" fill="#1a1a1a">||| || ||| | ||</text>
+        <text x="178" y="618" text-anchor="middle" font-family="Courier New, monospace" font-size="6" letter-spacing="2" fill="#888">LA-029471-2026</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="wrap pricing-section" id="pricing">
+  <div class="section-label">&#x2726; Pricing</div>
+  <h2 class="section-title">THREE OPTIONS.<br>ONE TRUTH.</h2>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div style="height:38px;margin-bottom:20px;"></div>
+      <div class="pricing-tier">Digital</div>
+      <div class="pricing-price">$14.99 <span>/ product</span></div>
+      <div class="pricing-sub">Delivered instantly by email</div>
+      <ul class="pricing-features">
+        <li>AI receipt or letter based on your story</li>
+        <li>Downloadable high quality PDF</li>
+        <li>Print at home or share digitally</li>
+        <li>Ready in under 2 minutes</li>
+      </ul>
+      <a href="create.html" class="pricing-btn pricing-btn-outline">Create Yours</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-badge">&#x2726; Best Value</div>
+      <div class="pricing-tier">Bundle</div>
+      <div class="pricing-price">$24.99 <span>/ pair</span></div>
+      <div class="pricing-sub">Receipt plus letter together</div>
+      <ul class="pricing-features">
+        <li>Love Receipt plus Love Letter</li>
+        <li>Or Breakup Receipt plus Breakup Letter</li>
+        <li>Say it two different ways</li>
+        <li>Save $4.99 vs buying separate</li>
+      </ul>
+      <a href="create.html?bundle=true" class="pricing-btn pricing-btn-solid">Get the Bundle</a>
+    </div>
+    <div class="pricing-card">
+      <div style="height:38px;margin-bottom:20px;"></div>
+      <div class="pricing-tier">Physical</div>
+      <div class="pricing-price">$79.99 <span>/ box</span></div>
+      <div class="pricing-sub">Shipped to their door</div>
+      <ul class="pricing-features">
+        <li>Digital version included</li>
+        <li>Giant receipt printed and rolled up</li>
+        <li>Ships in a premium gift box</li>
+        <li>3 to 5 business days in the US</li>
+      </ul>
+      <a href="create.html?physical=true" class="pricing-btn pricing-btn-outline">Order Physical</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="wrap products-section" id="products">
+  <div class="section-label">&#x2726; Four Ways To Say It</div>
+  <h2 class="section-title">FOUR WAYS<br>TO SAY IT.</h2>
+  <div class="products-grid">
+    <div class="card card-love">
+      <div class="card-num">01 / 04 &nbsp;&#xB7;&nbsp; RECEIPT</div>
+      <div class="card-name">THE LOVE<br>RECEIPT</div>
+      <div class="card-sub">For the ones worth keeping. Every reason, itemized.</div>
+      <div class="mini-r">
+        <div class="m-hd">LOVE RECEIPT</div>
+        <div class="m-dv"></div>
+        <div class="m-row"><span>Always showing up</span><span>x4 yrs</span></div>
+        <div class="m-row"><span>Making me feel safe</span><span>x&#x221E;</span></div>
+        <div class="m-row"><span>That thing you do</span><span>xdaily</span></div>
+        <div class="m-row"><span>Never making me doubt</span><span>x1,460</span></div>
+        <div class="m-dv"></div>
+        <div class="m-tot"><span>TOTAL LOVE</span><span>PRICELESS</span></div>
+      </div>
+      <div class="card-price">From <strong>$14.99</strong></div>
+      <a href="create.html?type=love" class="card-btn card-btn-love">Create Love Receipt</a>
+    </div>
+    <div class="card card-break">
+      <div class="card-num">02 / 04 &nbsp;&#xB7;&nbsp; RECEIPT</div>
+      <div class="card-name">THE BREAKUP<br>RECEIPT</div>
+      <div class="card-sub">For the ones who owe you. The debt, documented.</div>
+      <div class="mini-r">
+        <div class="m-hd">FINAL BILL</div>
+        <div class="m-dv"></div>
+        <div class="m-row"><span>Emotional unavailability</span><span>x8 mo</span></div>
+        <div class="m-row"><span>Gaslighting</span><span>x14</span></div>
+        <div class="m-row"><span>Left on read</span><span>x47</span></div>
+        <div class="m-row"><span>Wasted potential</span><span>x16 mo</span></div>
+        <div class="m-dv"></div>
+        <div class="m-tot"><span>BALANCE DUE</span><span>UNPAID</span></div>
+      </div>
+      <div class="card-price">From <strong>$14.99</strong></div>
+      <a href="create.html?type=breakup" class="card-btn card-btn-break">Create Breakup Receipt</a>
+    </div>
+    <div class="card card-love">
+      <div class="card-num">03 / 04 &nbsp;&#xB7;&nbsp; LETTER</div>
+      <div class="card-name">THE LOVE<br>LETTER</div>
+      <div class="card-sub">Everything you felt but couldn't find words for. Written by AI. Felt by them.</div>
+      <div class="mini-r" style="font-family:'DM Serif Display',serif;font-style:italic;font-size:9px;line-height:1.9;">
+        <div style="font-style:normal;font-family:'Courier New',monospace;font-size:8px;color:#666;margin-bottom:8px;">May 9, 2026</div>
+        <div style="color:#333;margin-bottom:8px;">"I keep trying to explain what you mean to me and running out of words before I run out of reasons. So I wrote them all down..."</div>
+        <div style="font-style:normal;font-family:'Courier New',monospace;font-size:8px;color:#555;">With everything I have</div>
+      </div>
+      <div class="card-price">From <strong>$14.99</strong></div>
+      <a href="create.html?type=love-letter" class="card-btn card-btn-love">Create Love Letter</a>
+    </div>
+    <div class="card card-break">
+      <div class="card-num">04 / 04 &nbsp;&#xB7;&nbsp; LETTER</div>
+      <div class="card-name">THE BREAKUP<br>LETTER</div>
+      <div class="card-sub">Not to hurt them. To be so accurate they can't dismiss it. Precision closure.</div>
+      <div class="mini-r" style="font-family:'DM Serif Display',serif;font-style:italic;font-size:9px;line-height:1.9;">
+        <div style="font-style:normal;font-family:'Courier New',monospace;font-size:8px;color:#666;margin-bottom:8px;">May 9, 2026</div>
+        <div style="color:#333;margin-bottom:8px;">"I am not writing this because I am angry. I am writing this because I deserve to say it clearly, once, and then never again..."</div>
+        <div style="font-style:normal;font-family:'Courier New',monospace;font-size:8px;color:#555;">Finally</div>
+      </div>
+      <div class="card-price">From <strong>$14.99</strong></div>
+      <a href="create.html?type=breakup-letter" class="card-btn card-btn-break">Create Breakup Letter</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="wrap how-section" id="how">
+  <div class="section-label">&#x2726; How It Works</div>
+  <h2 class="section-title">THREE STEPS.<br>ZERO MERCY.</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">TELL US EVERYTHING</div>
+      <p class="step-desc">Answer 6 questions about the person and the relationship. The more specific you are the more accurate the receipt. Takes about 3 minutes.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">WE DOCUMENT IT</div>
+      <p class="step-desc">Every moment accounted for. Every feeling quantified. Line by line, in print. Specific to you. Not a template. No two receipts are the same.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">IT ARRIVES</div>
+      <p class="step-desc">Download instantly or order a giant receipt shipped in a box. Delivered to them or to you. Either way it is on paper. Finally.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CELEBRITY -->
+<section class="wrap celeb-section">
+  <div class="section-label">&#x2726; If Only These Had Existed</div>
+  <h2 class="celeb-title">THE RECEIPTS<br><span>HISTORY NEEDED</span></h2>
+  <p class="celeb-sub">A few that should have been documented a long time ago.</p>
+  <div class="celeb-receipts">
+
+    <div class="celeb-card">
+      <div class="c-name">Penelope and Javier</div>
+      <div class="c-type">Love Receipt</div>
+      <div class="c-div"></div>
+      <div class="c-row"><span>Met on set</span><span>1992</span></div>
+      <div class="c-row"><span>Years apart before reconnecting</span><span>15</span></div>
+      <div class="c-row"><span>Married</span><span>2010</span></div>
+      <div class="c-row"><span>Oscars between them</span><span>2</span></div>
+      <div class="c-row"><span>Kids raised out of the spotlight</span><span>2</span></div>
+      <div class="c-row"><span>Years and still going</span><span>15+</span></div>
+      <div class="c-divs"></div>
+      <div class="c-bal"><span>TOTAL</span><span>STILL RUNNING</span></div>
+    </div>
+
+    <div class="celeb-card">
+      <div class="c-name">Kim and Kanye</div>
+      <div class="c-type">Final Bill</div>
+      <div class="c-div"></div>
+      <div class="c-row"><span>Years together</span><span>7</span></div>
+      <div class="c-row"><span>Public rants about her</span><span>many</span></div>
+      <div class="c-row"><span>Presidential campaign distraction</span><span>2020</span></div>
+      <div class="c-row"><span>Kids she is raising</span><span>4</span></div>
+      <div class="c-row"><span>Years of lawyers</span><span>ongoing</span></div>
+      <div class="c-divs"></div>
+      <div class="c-bal"><span>BALANCE DUE</span><span>UNPAID</span></div>
+    </div>
+
+    <div class="celeb-card">
+      <div class="c-name">Brad and Jen</div>
+      <div class="c-type">Final Bill</div>
+      <div class="c-div"></div>
+      <div class="c-row"><span>Years married</span><span>5</span></div>
+      <div class="c-row"><span>What happened on set</span><span>x1</span></div>
+      <div class="c-row"><span>Magazine covers after</span><span>years worth</span></div>
+      <div class="c-row"><span>The haircut everyone got to cope</span><span>millions</span></div>
+      <div class="c-row"><span>Time it takes to move on</span><span>ask the internet</span></div>
+      <div class="c-divs"></div>
+      <div class="c-bal"><span>BALANCE DUE</span><span>STILL OPEN</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+
+<!-- FREE TOOLS -->
+<section class="wrap" id="free-tools" style="border-top:1px solid rgba(255,255,255,0.04);">
+  <div class="section-label">&#x2726; Free Tools</div>
+  <h2 class="section-title">TRY BEFORE<br>YOU BUY.</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:48px;">
+
+    <div style="padding:40px;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.02);">
+      <div style="font-size:9px;letter-spacing:4px;color:var(--pink);margin-bottom:16px;text-transform:uppercase;">Free &#x2726;</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:2px;line-height:1;margin-bottom:12px;">WHAT DID THIS<br>ACTUALLY COST</div>
+      <p style="font-size:10px;color:var(--silver);line-height:1.9;margin-bottom:28px;">Your hourly rate times hours spent plus every bill you paid. Put a real number on what this relationship cost you. Free to use, no AI involved.</p>
+      <a href="cost-calculator.html" style="display:inline-block;background:transparent;border:1px solid rgba(255,255,255,0.12);color:var(--white);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;padding:12px 24px;text-decoration:none;transition:all .2s;" onmouseover="this.style.borderColor='var(--pink)';this.style.color='var(--pink)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='var(--white)'">Open Calculator</a>
+    </div>
+
+    <div style="padding:40px;border:1px solid rgba(255,20,147,0.18);background:rgba(255,20,147,0.04);">
+      <div style="font-size:9px;letter-spacing:4px;color:var(--pink);margin-bottom:16px;text-transform:uppercase;">Free &#x2726; 2 uses</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:2px;line-height:1;margin-bottom:12px;">BREAKUP<br>TEXT GENERATOR</div>
+      <p style="font-size:10px;color:var(--silver);line-height:1.9;margin-bottom:28px;">Tell us what happened, paste your writing style, upload screenshots if you have them. We write the text in your voice. 2 free generations.</p>
+      <a href="breakup-text.html" style="display:inline-block;background:var(--pink);color:var(--black);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;padding:12px 24px;text-decoration:none;transition:all .2s;" onmouseover="this.style.background='var(--white)'" onmouseout="this.style.background='var(--pink)'">Generate Text</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="wrap faq-section">
+  <div class="section-label">&#x2726; Questions</div>
+  <h2 class="section-title">BEFORE YOU<br>ASK.</h2>
+  <div class="faq-grid">
+    <div>
+      <div class="faq-q">Is it actually personalized?</div>
+      <div class="faq-a">Yes. You answer questions about the specific person and relationship. The AI generates a receipt based on what you share, not a template. No two receipts are the same.</div>
+    </div>
+    <div>
+      <div class="faq-q">How long does the physical box take?</div>
+      <div class="faq-a">3 to 5 business days within the US. You will get a confirmation email when your order ships.</div>
+    </div>
+    <div>
+      <div class="faq-q">How big is the physical receipt?</div>
+      <div class="faq-a">At least 3 feet long depending on the number of items. It arrives rolled up in a premium gift box. Think CVS receipt energy but make it personal.</div>
+    </div>
+    <div>
+      <div class="faq-q">Can I send it directly to them?</div>
+      <div class="faq-a">Yes. Enter their address at checkout and it ships straight to their door. You can also have it sent to yourself first.</div>
+    </div>
+    <div>
+      <div class="faq-q">What if I am not happy with the receipt?</div>
+      <div class="faq-a">The more detail you give us the better the output. If you are not satisfied with your digital receipt, email us and we will regenerate it.</div>
+    </div>
+    <div>
+      <div class="faq-q">Do you offer refunds?</div>
+      <div class="faq-a">Digital receipts are non-refundable once generated. Physical orders can be cancelled within 24 hours. Email hello@loveaccrued.ai.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="wrap cta-section" id="create">
+  <h2 class="cta-title">SAY IT<br><span>IN PRINT</span></h2>
+  <p class="cta-sub">The thing you could never find the words for.<br>We found them.</p>
+  <div class="hero-btns">
+    <a href="create.html" class="btn-primary">Create Love Receipt $14.99</a>
+    <a href="create.html?type=breakup" class="btn-outline">Create Breakup Receipt $14.99</a>
+  </div>
+  <p style="font-size:9px;letter-spacing:2px;color:#333;margin-top:24px;text-transform:uppercase;">Physical box available at checkout for $79.99</p>
+</section>
+
+<footer>
+  <div class="f-logo">
+    <svg width="14" height="22" viewBox="0 0 500 500" style="opacity:.5;" aria-hidden="true">
+      <rect width="500" height="500" fill="#080808"/>
+      <path d="M 165 92 L 335 92 L 335 418 L 165 418 Z" fill="#EDE8DC"/>
+      <path d="M 250 348 C 222 330 196 306 196 280 C 196 260 210 249 226 253 C 237 256 248 268 250 274 C 252 268 263 256 274 253 C 290 249 304 260 304 280 C 304 306 278 330 250 348 Z" fill="#FF1493"/>
+    </svg>
+    LOVE<span>ACCRUED</span>.AI
+  </div>
+  <div class="f-copy">2026 Love Accrued Everything Documented hello@loveaccrued.ai</div>
+</footer>
+</body>
+</html>
